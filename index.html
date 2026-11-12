@@ -1,0 +1,1018 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff4d2e'><path d='M12 2c-.5 2-2 4-4 6-2.5 2.5-3.5 5.5-2.5 8.5 1 3 3.5 4.5 6.5 4.5s5.5-1.5 6.5-4.5c1-3 0-6-2.5-8.5-2-2-3.5-4-4-6z'/></svg>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="AI-Powered Anti-Gravity Fire Detection System - Multi-Modal Sensor Fusion, Thermal FLIR Analytics, Automated Telephony Dispatch, and Zero-G Visualization Dashboard" />
+    <title>AURA-FIRE // AI Anti-Gravity Multi-Modal Fire Detection & Emergency Defense System</title>
+    
+    <!-- Google Fonts: Space Grotesk, Outfit, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <!-- Anti-Gravity Ambient Particle Canvas -->
+    <canvas id="antiGravityCanvas" class="ambient-canvas"></canvas>
+
+    <div id="app" class="system-root">
+      <!-- Top Navigation & System Status Header -->
+      <header class="system-header glass-card" id="mainHeader">
+        <div class="header-brand">
+          <div class="brand-orb-wrapper">
+            <div class="brand-orb" id="brandOrb"></div>
+            <div class="brand-rings"></div>
+          </div>
+          <div>
+            <div class="brand-title">
+              <span class="brand-gradient">AURA-FIRE</span>
+              <span class="brand-tag">DEFENSE-AI v4.9</span>
+            </div>
+            <div class="brand-sub">ANTI-GRAVITY MULTI-MODAL NEURAL FIRE DETECTION SYSTEM</div>
+          </div>
+        </div>
+
+        <!-- Global Status Pill Matrix -->
+        <div class="header-telemetry-strip">
+          <div class="status-chip" id="chipSystemState">
+            <span class="status-dot green pulse"></span>
+            <span class="chip-label">SYSTEM:</span>
+            <span class="chip-val highlight" id="sysStateVal">ACTIVE MONITORING</span>
+          </div>
+
+          <div class="status-chip" id="chipComputeNode">
+            <span class="status-dot cyan"></span>
+            <span class="chip-label">NODE:</span>
+            <button class="node-toggle-btn" id="btnToggleComputeNode" title="Switch Edge / Cloud Node">
+              <span id="nodeTypeLabel">EDGE NPU</span>
+              <span class="latency-badge" id="nodeLatencyBadge">8ms</span>
+            </button>
+          </div>
+
+          <div class="status-chip" id="chipEncryption">
+            <span class="status-dot green"></span>
+            <span class="chip-label">SECURITY:</span>
+            <span class="chip-val" id="tlsStatusVal">TLS 1.3 / mTLS</span>
+          </div>
+
+          <div class="status-chip" id="chipActiveZone">
+            <span class="status-dot blue"></span>
+            <span class="chip-label">SURVEILLANCE:</span>
+            <span class="chip-val" id="activeZoneLabel">ZONE-1 (BESS)</span>
+          </div>
+        </div>
+
+        <!-- Header Actions: Quick Drill, Emergency Audio Mute, Twilio Direct Dispatch -->
+        <div class="header-actions">
+          <button class="btn btn-secondary btn-sm" id="btnAudioToggle" title="Toggle System Alert Audio">
+            <span class="btn-icon" id="audioIcon">🔊</span>
+            <span id="audioText">SOUND ON</span>
+          </button>
+          
+          <div class="dropdown-container">
+            <button class="btn btn-warning btn-sm" id="btnDrillMenu">
+              <span class="btn-icon">⚡</span>
+              <span>SIMULATE EVENT</span>
+            </button>
+            <div class="dropdown-menu hidden" id="drillDropdown">
+              <button class="dropdown-item" data-scenario="normal">
+                <span class="scenario-dot green"></span> Normal Baseline Telemetry
+              </button>
+              <button class="dropdown-item" data-scenario="smolder">
+                <span class="scenario-dot amber"></span> Phase 1: Incipient Smolder (Smoke PPM ↑)
+              </button>
+              <button class="dropdown-item" data-scenario="thermal">
+                <span class="scenario-dot orange"></span> Phase 2: Thermal Runaway (>110°C)
+              </button>
+              <button class="dropdown-item" data-scenario="flame">
+                <span class="scenario-dot red"></span> Phase 3: Critical Flame Flashover (Alarm)
+              </button>
+              <button class="dropdown-item" data-scenario="false_alarm">
+                <span class="scenario-dot purple"></span> False Alarm: High Steam / Hot Motor
+              </button>
+            </div>
+          </div>
+
+          <button class="btn btn-danger btn-sm" id="btnTriggerSuppression">
+            <span class="btn-icon">🧯</span>
+            <span>CLEAN AGENT SUPPRESSION</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Navigation Tabs -->
+      <nav class="system-nav glass-card" id="mainNav">
+        <button class="nav-tab active" data-tab="dashboard">
+          <span class="tab-icon">🖥️</span>
+          <span>LIVE COMMAND & SENSORS</span>
+        </button>
+        <button class="nav-tab" data-tab="neuralEngine">
+          <span class="tab-icon">🧠</span>
+          <span>AI NEURAL ENGINE & PREPROCESSING</span>
+        </button>
+        <button class="nav-tab" data-tab="floorPlan">
+          <span class="tab-icon">🗺️</span>
+          <span>FACILITY SCHEMATIC 2.5D</span>
+        </button>
+        <button class="nav-tab" data-tab="notifications">
+          <span class="tab-icon">🚨</span>
+          <span>DISPATCH & EMERGENCY CALL</span>
+          <span class="tab-badge" id="alertCounterBadge">0</span>
+        </button>
+        <button class="nav-tab" data-tab="database">
+          <span class="tab-icon">🗄️</span>
+          <span>INCIDENT ARCHIVE & AUDIT</span>
+        </button>
+        <button class="nav-tab" data-tab="admin">
+          <span class="tab-icon">⚙️</span>
+          <span>ADMIN & THRESHOLDS</span>
+        </button>
+      </nav>
+
+      <!-- Dynamic Content View Area -->
+      <main class="system-main" id="systemMain">
+        <!-- Tab 1: Live Command & Sensors (Default) -->
+        <section class="tab-content active" id="tab-dashboard">
+          <!-- Primary Registered Emergency Contact Bar -->
+          <div class="registered-person-banner glass-card" id="registeredPersonBanner">
+            <div class="reg-info-cluster">
+              <span class="reg-badge-label">🛡️ REGISTERED EMERGENCY CONTACT:</span>
+              <div class="reg-item"><span>NAME:</span> <span class="reg-val" id="regUserNameBadge">Aditya Sharma</span></div>
+              <div class="reg-item"><span>GMAIL:</span> <span class="reg-val highlight" id="regUserEmailBadge">aditya.fireproject@gmail.com</span></div>
+              <div class="reg-item"><span>PHONE:</span> <span class="reg-val highlight-phone" id="regUserPhoneBadge">+91 9876543210</span></div>
+              <div class="reg-item"><span>ESCALATION:</span> <span class="reg-val" id="regUserTimerBadge">15s</span></div>
+            </div>
+            <button class="btn btn-secondary btn-sm" id="btnOpenEditRegModal">
+              <span>✏️ EDIT CONTACT PROFILE</span>
+            </button>
+          </div>
+
+          <!-- Autonomous 4-Stage Fire Escalation Pipeline -->
+          <div class="emergency-pipeline-card glass-card anti-gravity-float" id="emergencyPipelineCard">
+            <div class="pipeline-header">
+              <div class="pipeline-title-group">
+                <span class="pipeline-icon">🔥</span>
+                <div>
+                  <div class="pipeline-title">AUTONOMOUS FIRE DETECTION & ESCALATION PROTOCOL</div>
+                  <div class="pipeline-sub">Laptop Camera CV Detection ➔ Instant Gmail Photo Dispatch ➔ Response Verification ➔ Autonomous Phone Call</div>
+                </div>
+              </div>
+              <div class="pipeline-controls">
+                <button class="btn btn-warning btn-sm" id="btnToggleSimFlame">
+                  <span>🔥 TEST FLAME (SIMULATOR)</span>
+                </button>
+                <button class="btn btn-secondary btn-sm hidden" id="btnPipelineViewEmail">
+                  <span>✉️ VIEW SENT GMAIL & PHOTO</span>
+                </button>
+                <button class="btn btn-success btn-sm hidden" id="btnPipelineAcknowledge">
+                  <span>✅ I AM SAFE (CANCEL CALL)</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="pipeline-steps-grid">
+              <!-- Step 1 -->
+              <div class="pipeline-step-item" id="pipeStep1">
+                <div class="step-num">STAGE 1</div>
+                <div class="step-icon">📷</div>
+                <div class="step-label">LAPTOP CAMERA DETECTION</div>
+                <div class="step-status" id="pipeStep1Status"><span class="status-dot green"></span> MONITORING WEBCAM</div>
+                <div class="step-detail">Live computer-vision fire segmentation</div>
+              </div>
+
+              <div class="pipe-connector">➔</div>
+
+              <!-- Step 2 -->
+              <div class="pipeline-step-item" id="pipeStep2">
+                <div class="step-num">STAGE 2</div>
+                <div class="step-icon">✉️</div>
+                <div class="step-label">EMAIL PHOTO TO GMAIL</div>
+                <div class="step-status" id="pipeStep2Status"><span class="status-dot dim"></span> STANDBY</div>
+                <div class="step-detail">Transmits evidence photo to registered Gmail</div>
+                <img id="pipelineSnapshotThumb" class="snapshot-micro-thumb hidden" alt="Fire Snapshot" />
+              </div>
+
+              <div class="pipe-connector">➔</div>
+
+              <!-- Step 3 -->
+              <div class="pipeline-step-item" id="pipeStep3">
+                <div class="step-num">STAGE 3</div>
+                <div class="step-icon">⏱️</div>
+                <div class="step-label">RESPONSE & FLAME GROWTH CHECK</div>
+                <div class="step-status" id="pipeStep3Status"><span class="status-dot dim"></span> STANDBY</div>
+                <div class="step-detail">Awaiting response & checking if flame increases (<span id="pipelineFlameGrowthRate">+0%</span>)</div>
+              </div>
+
+              <div class="pipe-connector">➔</div>
+
+              <!-- Step 4 -->
+              <div class="pipeline-step-item" id="pipeStep4">
+                <div class="step-num">STAGE 4</div>
+                <div class="step-icon">📞</div>
+                <div class="step-label">AUTONOMOUS PHONE CALL</div>
+                <div class="step-status" id="pipeStep4Status"><span class="status-dot dim"></span> STANDBY</div>
+                <div class="step-detail">Dials registered phone with emergency AI voice</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Top Row: Dual Visual & Thermal Video Stream + Live AI Overlays -->
+          <div class="dashboard-grid">
+            <!-- Left / Center: Primary Video Surveillance Unit (Layer 1 Input + Layer 3 Detection) -->
+            <div class="video-surveillance-card glass-card anti-gravity-float">
+              <div class="card-header">
+                <div class="card-title-group">
+                  <span class="live-indicator"><span class="rec-dot"></span> LIVE FEED</span>
+                  <h3 id="currentCameraTitle">WEBCAM: Integrated Laptop HD Camera (Direct Sensor)</h3>
+                  <span class="badge" id="cameraFeedRes">1080p @ 30 FPS</span>
+                </div>
+                <!-- Camera Controls & Stream Mode -->
+                <div class="camera-actions-cluster">
+                  <button class="btn btn-primary btn-sm" id="btnToggleWebcam">
+                    <span class="btn-icon">📷</span>
+                    <span id="webcamBtnLabel">START NORMAL CAMERA</span>
+                  </button>
+                  <button class="btn btn-secondary btn-sm" id="btnToggleVirtualCam" title="Activate Virtual Camera Simulation if camera is unavailable">
+                    <span class="btn-icon">🖥️</span>
+                    <span>VIRTUAL SIMULATOR</span>
+                  </button>
+
+                  <div class="feed-mode-selector">
+                    <button class="mode-pill active" data-mode="rgb">NORMAL CAMERA</button>
+                    <button class="mode-pill" data-mode="split">SPLIT RGB / FLIR</button>
+                    <button class="mode-pill" data-mode="thermal">FLIR THERMAL</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Webcam Live Calibration Toolbar -->
+              <div class="webcam-live-toolbar hidden" id="webcamToolbar">
+                <div class="toolbar-pill">
+                  <span class="tb-dot green pulse"></span>
+                  <span class="tb-title">LIVE SENSOR:</span>
+                  <span class="tb-val" id="webcamDeviceLabel">Integrated Laptop HD Camera</span>
+                </div>
+                <div class="toolbar-ctrl">
+                  <label for="webcamSensitivity">CV Sensitivity:</label>
+                  <input type="range" id="webcamSensitivity" min="40" max="100" value="75" class="slider-mini">
+                  <span id="webcamSensVal">75%</span>
+                </div>
+                <div class="toolbar-ctrl">
+                  <button class="btn-xs btn-secondary active" id="btnToggleFlicker">Dynamic Flicker Filter: ON</button>
+                </div>
+                <div class="toolbar-hint">
+                  <span>💡 Tip: Hold a lighter, candle, or phone displaying fire in front of your camera.</span>
+                </div>
+              </div>
+
+              <!-- Camera Blocked Help Banner (Shows if Chrome blocks camera permissions) -->
+              <div class="camera-perm-banner hidden" id="cameraPermBanner">
+                <span class="banner-icon">📷❌</span>
+                <div class="banner-text">
+                  <strong>Camera Access Blocked in Chrome:</strong>
+                  Click the <strong>camera icon with the red cross</strong> in your address bar (left of <code>localhost:5173</code>), select <strong>"Always allow localhost:5173 to access your camera"</strong>, and click <strong>Done</strong>.
+                </div>
+                <button class="btn btn-warning btn-xs" id="btnRetryCamera">RETRY CAMERA</button>
+              </div>
+
+              <!-- Video Stream Rendering Canvas Matrix -->
+              <div class="video-stage-container" id="videoStage">
+                <!-- Native Live Webcam Video Feed (Direct Normal Camera) -->
+                <video id="liveWebcamVideo" class="live-webcam-feed" autoplay playsinline muted></video>
+                <canvas id="cameraCanvas" class="camera-canvas" width="960" height="480"></canvas>
+                
+                <!-- Anti-Gravity AI HUD Overlay (Bounding Boxes, Heatmap, Confidences) -->
+                <div class="ai-hud-overlay" id="aiHudOverlay">
+                  <div class="hud-top-metrics">
+                    <div class="hud-pill" id="hudFlameConf">FLAME: <span class="val">0.0%</span></div>
+                    <div class="hud-pill" id="hudSmokeConf">SMOKE: <span class="val">0.0%</span></div>
+                    <div class="hud-pill" id="hudThermalMax">MAX TEMP: <span class="val">23.4°C</span></div>
+                    <div class="hud-pill" id="hudInferenceTime">LATENCY: <span class="val">6.8ms</span></div>
+                  </div>
+                  <!-- Floating Warning Banner when Fire Detected -->
+                  <div class="fire-alert-hud-banner hidden" id="fireHudBanner">
+                    <div class="alert-pulse-icon">🔥</div>
+                    <div class="alert-pulse-text">
+                      <div class="alert-title">CONFIRMED FIRE THREAT DETECTED</div>
+                      <div class="alert-detail" id="hudBannerDetail">MULTIMODAL FUSION RISK: 98.6% — AUTO DISPATCH READY</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Zone Camera Quick Switcher Dock -->
+                <div class="camera-zone-dock" id="cameraZoneDock">
+                  <button class="dock-zone-btn webcam-dock-btn active" data-zone="webcam" id="dockBtnWebcam" title="Detect fire directly using your laptop camera">
+                    <span class="zone-id">📷</span>
+                    <span class="zone-name">My Laptop Cam</span>
+                    <span class="zone-status-pill green" id="webcamPill">READY</span>
+                  </button>
+                  <button class="dock-zone-btn" data-zone="1">
+                    <span class="zone-id">Z1</span>
+                    <span class="zone-name">Battery Room</span>
+                    <span class="zone-status-pill green" id="z1Pill">NORMAL</span>
+                  </button>
+                  <button class="dock-zone-btn" data-zone="2">
+                    <span class="zone-id">Z2</span>
+                    <span class="zone-name">Server Alpha</span>
+                    <span class="zone-status-pill green" id="z2Pill">NORMAL</span>
+                  </button>
+                  <button class="dock-zone-btn" data-zone="3">
+                    <span class="zone-id">Z3</span>
+                    <span class="zone-name">Chemical Lab</span>
+                    <span class="zone-status-pill green" id="z3Pill">NORMAL</span>
+                  </button>
+                  <button class="dock-zone-btn" data-zone="4">
+                    <span class="zone-id">Z4</span>
+                    <span class="zone-name">Logistics Hub</span>
+                    <span class="zone-status-pill green" id="z4Pill">NORMAL</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Stream Information Bar -->
+              <div class="card-footer-metrics">
+                <div class="metric-item">
+                  <span class="m-label">OPTICAL SENSOR:</span>
+                  <span class="m-val">Sony Starvis 4K Low-Light RGB</span>
+                </div>
+                <div class="metric-item">
+                  <span class="m-label">THERMAL RADIOMETRIC:</span>
+                  <span class="m-val">FLIR Lepton 3.5 Long-Wave Infrared (8-14μm)</span>
+                </div>
+                <div class="metric-item">
+                  <span class="m-label">AI BOUNDING BOX:</span>
+                  <span class="m-val font-mono" id="hudBoundingBoxCoords">Coords: [X: --, Y: --, W: --, H: --]</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Column: Multi-Modal Sensor Fusion & Environmental Telemetry (Layer 1 & 2) -->
+            <div class="telemetry-column">
+              <!-- Risk Index Gauge (Anti-Gravity Floating Glass Orb) -->
+              <div class="risk-gauge-card glass-card anti-gravity-float">
+                <div class="card-header-compact">
+                  <span class="card-label">AI MULTI-MODAL RISK FUSION</span>
+                  <span class="badge" id="fusionDecisionState">SECURE</span>
+                </div>
+                <div class="risk-meter-wrapper">
+                  <svg class="risk-meter-svg" viewBox="0 0 200 120">
+                    <path class="meter-track" d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="14" stroke-linecap="round"/>
+                    <path class="meter-fill" id="meterFillPath" d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="url(#meterGradient)" stroke-width="14" stroke-linecap="round" stroke-dasharray="251.2" stroke-dashoffset="251.2"/>
+                    <defs>
+                      <linearGradient id="meterGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#00f5d4"/>
+                        <stop offset="40%" stop-color="#fee440"/>
+                        <stop offset="70%" stop-color="#ff9100"/>
+                        <stop offset="100%" stop-color="#ff0055"/>
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                  <div class="meter-value-overlay">
+                    <span class="meter-big-num" id="meterBigNum">2%</span>
+                    <span class="meter-sub">THREAT INDEX</span>
+                  </div>
+                </div>
+                <div class="risk-weights-breakdown">
+                  <div class="weight-row">
+                    <span>Optical Flame ViT:</span>
+                    <span class="val font-mono" id="weightValOptical">0%</span>
+                  </div>
+                  <div class="weight-row">
+                    <span>Thermal Infrared Heat:</span>
+                    <span class="val font-mono" id="weightValThermal">23°C (0%)</span>
+                  </div>
+                  <div class="weight-row">
+                    <span>Smoke Particulate (PPM):</span>
+                    <span class="val font-mono" id="weightValSmoke">12 PPM</span>
+                  </div>
+                  <div class="weight-row">
+                    <span>Rate-of-Rise (RoR):</span>
+                    <span class="val font-mono" id="weightValRoR">+0.1°C/min</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Sensor Telemetry Grid -->
+              <div class="sensors-grid-card glass-card anti-gravity-float">
+                <div class="card-header-compact">
+                  <span class="card-label">ZONE SENSOR TELEMETRY</span>
+                  <span class="badge green" id="sensorsStatusBadge">CALIBRATED</span>
+                </div>
+                <div class="sensor-tiles-container">
+                  <!-- Temperature -->
+                  <div class="sensor-tile" id="tileTemp">
+                    <div class="sensor-icon">🌡️</div>
+                    <div class="sensor-info">
+                      <div class="s-name">TEMPERATURE</div>
+                      <div class="s-value"><span id="telemetryTemp">23.8</span> <small>°C</small></div>
+                      <div class="s-trend" id="telemetryTempTrend">Normal ambient</div>
+                    </div>
+                  </div>
+                  <!-- Smoke PPM -->
+                  <div class="sensor-tile" id="tileSmoke">
+                    <div class="sensor-icon">💨</div>
+                    <div class="sensor-info">
+                      <div class="s-name">SMOKE OBSCURATION</div>
+                      <div class="s-value"><span id="telemetrySmoke">14</span> <small>PPM</small></div>
+                      <div class="s-trend" id="telemetrySmokeTrend">&lt; 25 PPM Baseline</div>
+                    </div>
+                  </div>
+                  <!-- Air Quality / CO -->
+                  <div class="sensor-tile" id="tileAqi">
+                    <div class="sensor-icon">🍃</div>
+                    <div class="sensor-info">
+                      <div class="s-name">CO / AIR QUALITY (AQI)</div>
+                      <div class="s-value"><span id="telemetryAqi">38</span> <small>AQI</small></div>
+                      <div class="s-trend" id="telemetryAqiTrend">Good (0-50)</div>
+                    </div>
+                  </div>
+                  <!-- Humidity -->
+                  <div class="sensor-tile" id="tileHumidity">
+                    <div class="sensor-icon">💧</div>
+                    <div class="sensor-info">
+                      <div class="s-name">HUMIDITY</div>
+                      <div class="s-value"><span id="telemetryHumidity">44.2</span> <small>% RH</small></div>
+                      <div class="s-trend">Controlled climate</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Row: Realtime Sensor Waveform & Multi-Modal Alignment Graph -->
+          <div class="telemetry-waveform-row glass-card anti-gravity-float">
+            <div class="waveform-header">
+              <div class="waveform-title-group">
+                <span class="waveform-icon">📈</span>
+                <div>
+                  <h4 class="waveform-title">REAL-TIME SENSOR STREAM & KALMAN FILTERING (LAYER 2 PREPROCESSING)</h4>
+                  <p class="waveform-sub">Raw Sensor Stream vs Kalman-Filtered Denoised Signal (100Hz Telemetry Buffer)</p>
+                </div>
+              </div>
+              <div class="waveform-legend">
+                <span class="legend-chip raw"><span class="line-dot"></span> RAW JITTER SENSOR</span>
+                <span class="legend-chip filtered"><span class="line-dot"></span> KALMAN FILTERED</span>
+                <span class="legend-chip threshold"><span class="line-dot"></span> FIRE THRESHOLD (120 PPM / 65°C)</span>
+              </div>
+            </div>
+            <div class="waveform-canvas-box">
+              <canvas id="waveformCanvas" width="1200" height="140"></canvas>
+            </div>
+          </div>
+        </section>
+
+        <!-- Tab 2: AI Neural Engine & Preprocessing (Layer 2 & 3) -->
+        <section class="tab-content" id="tab-neuralEngine">
+          <div class="neural-engine-layout">
+            <!-- Left: Model Architecture Visualizer -->
+            <div class="architecture-card glass-card">
+              <div class="card-header">
+                <div>
+                  <h3>DEEP LEARNING MODEL ARCHITECTURE</h3>
+                  <p class="section-sub">Multi-Modal Vision Transformer (ViT) + Bi-LSTM Temporal Fusion Head</p>
+                </div>
+                <span class="badge cyan">MODEL: NEURAL-FLAME-v4.2</span>
+              </div>
+
+              <!-- Multi-Stage Pipeline Interactive Diagram -->
+              <div class="pipeline-diagram-container">
+                <div class="pipe-stage stage-input">
+                  <div class="stage-tag">STAGE 1: INPUT</div>
+                  <div class="stage-box">
+                    <div class="node-item">RGB Feed (1080p@30fps)</div>
+                    <div class="node-item">Thermal FLIR (8-14μm)</div>
+                    <div class="node-item">Gas & Temp (100Hz)</div>
+                  </div>
+                </div>
+
+                <div class="pipe-arrow">➔</div>
+
+                <div class="pipe-stage stage-preproc">
+                  <div class="stage-tag">STAGE 2: PREPROCESSING</div>
+                  <div class="stage-box">
+                    <div class="node-item">Frame Resizer 640x640</div>
+                    <div class="node-item">Kalman Denoising</div>
+                    <div class="node-item">Temporal Resampling</div>
+                  </div>
+                </div>
+
+                <div class="pipe-arrow">➔</div>
+
+                <div class="pipe-stage stage-backbone">
+                  <div class="stage-tag">STAGE 3: EMBEDDINGS</div>
+                  <div class="stage-box">
+                    <div class="node-item">ViT Patch Tokens (16x16)</div>
+                    <div class="node-item">Radiometric Heat Tensor</div>
+                    <div class="node-item">Sensor Positional Encoding</div>
+                  </div>
+                </div>
+
+                <div class="pipe-arrow">➔</div>
+
+                <div class="pipe-stage stage-fusion">
+                  <div class="stage-tag">STAGE 4: CROSS-ATTENTION</div>
+                  <div class="stage-box highlight-box">
+                    <div class="node-item">Multi-Head Cross Attention</div>
+                    <div class="node-item">Bi-LSTM Temporal Window</div>
+                    <div class="node-item">Spatial Bounding Box Head</div>
+                  </div>
+                </div>
+
+                <div class="pipe-arrow">➔</div>
+
+                <div class="pipe-stage stage-decision">
+                  <div class="stage-tag">STAGE 5: DECISION LOGIC</div>
+                  <div class="stage-box">
+                    <div class="node-item">Flame Confidence Score</div>
+                    <div class="node-item">Thermal Anomaly Score</div>
+                    <div class="node-item">Automated Dispatch Gate</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Live Model Metrics & Tensor Dimensions -->
+              <div class="tensor-metrics-grid">
+                <div class="tensor-card">
+                  <span class="t-name">VISUAL BACKBONE</span>
+                  <span class="t-val">Vision Transformer (12 Layers, 8 Heads)</span>
+                  <span class="t-sub">Parameters: 22.4M FLOPs: 4.8 GFLOPS</span>
+                </div>
+                <div class="tensor-card">
+                  <span class="t-name">TEMPORAL RECEPTIVE FIELD</span>
+                  <span class="t-val">60 Frames (2.0s Temporal Buffer)</span>
+                  <span class="t-sub">Captures flicker frequency (10-15Hz)</span>
+                </div>
+                <div class="tensor-card">
+                  <span class="t-name">THERMAL GRADIENT RESOLUTION</span>
+                  <span class="t-val">0.05°C NETD Sensitivity</span>
+                  <span class="t-sub">Noise Equivalent Temp Difference</span>
+                </div>
+                <div class="tensor-card">
+                  <span class="t-name">EDGE INFERENCE ACCELERATOR</span>
+                  <span class="t-val">TensorRT FP16 Quantized</span>
+                  <span class="t-sub">Latency: 6.8ms (147 FPS throughput)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Decision Logic Unit & Weight Simulator -->
+            <div class="decision-logic-card glass-card">
+              <div class="card-header">
+                <div>
+                  <h3>DECISION LOGIC & SENSOR FUSION RULES</h3>
+                  <p class="section-sub">Bayesian Sensor Weighting & Verification Gate</p>
+                </div>
+              </div>
+
+              <div class="decision-rules-list">
+                <div class="rule-item" id="ruleVisual">
+                  <div class="rule-status-dot" id="dotRuleVisual"></div>
+                  <div class="rule-content">
+                    <div class="rule-title">Rule A: High Visual Flame + Rapid Flickering</div>
+                    <div class="rule-expr">Confidence &gt; 85% AND Frequency ∈ [8Hz, 18Hz]</div>
+                    <div class="rule-state" id="stateRuleVisual">NO FLAME DETECTED (0%)</div>
+                  </div>
+                </div>
+
+                <div class="rule-item" id="ruleThermal">
+                  <div class="rule-status-dot" id="dotRuleThermal"></div>
+                  <div class="rule-content">
+                    <div class="rule-title">Rule B: Radiometric Thermal Spike</div>
+                    <div class="rule-expr">Max Spot Temp &gt; 65°C OR RoR &gt; +5.0°C/min</div>
+                    <div class="rule-state" id="stateRuleThermal">NOMINAL (23.8°C, +0.1°C/min)</div>
+                  </div>
+                </div>
+
+                <div class="rule-item" id="ruleGas">
+                  <div class="rule-status-dot" id="dotRuleGas"></div>
+                  <div class="rule-content">
+                    <div class="rule-title">Rule C: Smoke Particulate Obscuration</div>
+                    <div class="rule-expr">Filter(PPM) &gt; 75 PPM AND AQI &gt; 150</div>
+                    <div class="rule-state" id="stateRuleGas">CLEAR ATMOSPHERE (14 PPM)</div>
+                  </div>
+                </div>
+
+                <div class="rule-item" id="ruleFusionFinal">
+                  <div class="rule-status-dot" id="dotRuleFusionFinal"></div>
+                  <div class="rule-content">
+                    <div class="rule-title">Rule D: Multi-Modal Verification Gate</div>
+                    <div class="rule-expr">Combined Threat Index &gt; Threshold (75%)</div>
+                    <div class="rule-state font-bold" id="stateRuleFusionFinal">STATUS: SAFE — ARMED</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Interactive Dynamic Weight Adjusters -->
+              <div class="fusion-weights-adjuster">
+                <div class="adjuster-header">
+                  <span>SENSOR FUSION WEIGHT DISTRIBUTION</span>
+                  <button class="btn btn-xs" id="btnResetWeights">Reset Defaults</button>
+                </div>
+                <div class="slider-group">
+                  <div class="slider-label">
+                    <span>Visual RGB Model Weight (W1):</span>
+                    <span id="sliderW1Val">40%</span>
+                  </div>
+                  <input type="range" min="10" max="70" value="40" id="sliderW1" class="slider-range" />
+                </div>
+
+                <div class="slider-group">
+                  <div class="slider-label">
+                    <span>Thermal Infrared Weight (W2):</span>
+                    <span id="sliderW2Val">35%</span>
+                  </div>
+                  <input type="range" min="10" max="70" value="35" id="sliderW2" class="slider-range" />
+                </div>
+
+                <div class="slider-group">
+                  <div class="slider-label">
+                    <span>Smoke & Gas Sensors Weight (W3):</span>
+                    <span id="sliderW3Val">25%</span>
+                  </div>
+                  <input type="range" min="10" max="70" value="25" id="sliderW3" class="slider-range" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Tab 3: Interactive Facility Schematic 2.5D (Layer 6 Dashboard) -->
+        <section class="tab-content" id="tab-floorPlan">
+          <div class="floorplan-layout glass-card">
+            <div class="card-header">
+              <div>
+                <h3>INTERACTIVE 2.5D FACILITY SCHEMATIC</h3>
+                <p class="section-sub">Anti-Gravity Zero-G Spatial Mapping, Thermal Heat Spread & Sensor Nodes</p>
+              </div>
+              <div class="floorplan-view-controls">
+                <button class="btn btn-sm btn-secondary active" id="btnFloorViewIsometric">ISOMETRIC 3D</button>
+                <button class="btn btn-sm btn-secondary" id="btnFloorViewHeatmap">THERMAL OVERLAY</button>
+                <button class="btn btn-sm btn-secondary" id="btnFloorViewSuppression">SUPPRESSION MIST</button>
+              </div>
+            </div>
+
+            <!-- Canvas for Interactive Schematic -->
+            <div class="floorplan-stage">
+              <canvas id="floorPlanCanvas" width="1100" height="580"></canvas>
+              
+              <!-- Floating Overlay Legend -->
+              <div class="floorplan-legend-floating">
+                <div class="legend-row"><span class="node-pill-sm normal"></span> Active Sensor Beacon</div>
+                <div class="legend-row"><span class="node-pill-sm warning"></span> Thermal Anomaly</div>
+                <div class="legend-row"><span class="node-pill-sm critical"></span> Active Fire Perimeter</div>
+                <div class="legend-row"><span class="node-pill-sm mist"></span> Halon / Water Mist Nozzle</div>
+              </div>
+
+              <!-- Interactive Selected Zone Card -->
+              <div class="selected-zone-floating-card" id="selectedZoneCard">
+                <div class="sz-title" id="szName">ZONE 1: Battery Storage (BESS)</div>
+                <div class="sz-stats">
+                  <div>Status: <span class="badge green" id="szStatus">NOMINAL</span></div>
+                  <div>Cameras: <span class="val">1 Optical + 1 Thermal</span></div>
+                  <div>Sensors: <span class="val">4 Multi-modal Nodes</span></div>
+                  <div>Suppression: <span class="val text-cyan">Aerosol Clean Agent</span></div>
+                </div>
+                <button class="btn btn-sm btn-primary w-100" id="btnSwitchToSelectedZone">Focus Camera Stream</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Tab 4: Dispatch & Emergency Call System (Layer 4 Alert & Notification) -->
+        <section class="tab-content" id="tab-notifications">
+          <div class="notifications-layout">
+            <!-- Left: Automated Emergency Telephony Dispatch (Twilio / Fire Dept API) -->
+            <div class="telephony-card glass-card">
+              <div class="card-header">
+                <div>
+                  <div class="card-badge-row">
+                    <span class="badge red">TWILIO EMERGENCY VOICE DISPATCH</span>
+                    <span class="badge" id="telephonyCallStatus">STANDBY</span>
+                  </div>
+                  <h3>AUTOMATED 911 / FIRE DEPARTMENT TELEPHONY CALL</h3>
+                  <p class="section-sub">Autonomous Voice Call with Synthesized Incident Geolocation & Severity</p>
+                </div>
+                <button class="btn btn-danger" id="btnTestEmergencyCall">
+                  <span class="btn-icon">📞</span>
+                  <span>INITIATE EMERGENCY CALL</span>
+                </button>
+              </div>
+
+              <!-- Telephony Interactive Call HUD Screen -->
+              <div class="telephony-hud" id="telephonyHud">
+                <div class="telephony-screen">
+                  <div class="call-avatar-circle" id="callAvatar">
+                    <span class="call-pulse-ring"></span>
+                    <span class="call-center-icon">🚒</span>
+                  </div>
+                  <div class="call-dest-info">
+                    <div class="call-dest-name">METRO FIRE DISPATCH COMMAND (STATION 14)</div>
+                    <div class="call-dest-number">+1 (800) 555-FIRE // TWILIO API CONNECT</div>
+                    <div class="call-timer" id="callTimerDisplay">00:00</div>
+                  </div>
+
+                  <!-- Live Audio Waveform Visualizer -->
+                  <div class="call-audio-waveform-box">
+                    <canvas id="callWaveformCanvas" width="450" height="60"></canvas>
+                  </div>
+
+                  <!-- Live Voice Transcript Stream -->
+                  <div class="call-transcript-box">
+                    <div class="transcript-header">AI SYNTHESIZED EMERGENCY TRANSMISSION:</div>
+                    <div class="transcript-body font-mono" id="callTranscriptText">
+                      [System Standby. Click "Initiate Emergency Call" to simulate autonomous telephony voice transmission to first responders.]
+                    </div>
+                  </div>
+
+                  <div class="call-controls-row">
+                    <button class="btn btn-secondary btn-sm" id="btnReplayAudioVoice" disabled>
+                      <span>🔊 Replay AI Voice Audio</span>
+                    </button>
+                    <button class="btn btn-danger btn-sm" id="btnEndEmergencyCall" disabled>
+                      <span>Disconnect Call</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: SMS, Email & Push Notification Dispatch Channels -->
+            <div class="channels-card glass-card">
+              <div class="card-header">
+                <div>
+                  <h3>MULTI-CHANNEL ALERT MATRIX</h3>
+                  <p class="section-sub">Simultaneous Push, SMS, and Email Notification Dispatches</p>
+                </div>
+                <button class="btn btn-secondary btn-sm" id="btnClearAlertHistory">Clear Feed</button>
+              </div>
+
+              <!-- Simulated Smartphone SMS & Push View -->
+              <div class="smart-mockup-wrapper">
+                <div class="sim-phone-header">
+                  <span>FACILITY ALERT CONSOLE</span>
+                  <span class="font-mono" id="simPhoneClock">18:04</span>
+                </div>
+
+                <!-- Live Stream of Dispatch Events -->
+                <div class="dispatches-stream-container" id="dispatchesStream">
+                  <!-- Sample initial items will be rendered via JS -->
+                </div>
+              </div>
+
+              <!-- Channel Delivery Status Pills -->
+              <div class="channel-status-bar">
+                <div class="ch-chip">
+                  <span class="ch-icon">📱</span>
+                  <span class="ch-name">SMS GATEWAY:</span>
+                  <span class="ch-status green">ONLINE (Twilio SMS)</span>
+                </div>
+                <div class="ch-chip">
+                  <span class="ch-icon">✉️</span>
+                  <span class="ch-name">EMAIL SMTP:</span>
+                  <span class="ch-status green">READY (TLS Encrypted)</span>
+                </div>
+                <div class="ch-chip">
+                  <span class="ch-icon">🔔</span>
+                  <span class="ch-name">WEB PUSH:</span>
+                  <span class="ch-status green">SUBSCRIBED (Active)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Tab 5: Incident Archive & Audit Database (Layer 5) -->
+        <section class="tab-content" id="tab-database">
+          <div class="database-layout glass-card">
+            <div class="card-header">
+              <div>
+                <h3>HISTORICAL SENSOR & VIDEO DATA STORAGE</h3>
+                <p class="section-sub">Indexed Incident Archives, Telemetry Logs, AI Detection Outcomes & Audit Trail</p>
+              </div>
+              <div class="database-actions">
+                <input type="text" placeholder="Filter by Zone, Trigger, or Severity..." class="search-input" id="dbSearchInput" />
+                <button class="btn btn-secondary btn-sm" id="btnExportJSON">📥 EXPORT JSON</button>
+                <button class="btn btn-secondary btn-sm" id="btnExportCSV">📊 EXPORT CSV</button>
+                <button class="btn btn-primary btn-sm" id="btnSimulateNewLog">+ RECORD AUDIT EVENT</button>
+              </div>
+            </div>
+
+            <!-- Table of Archived Logs -->
+            <div class="database-table-wrapper">
+              <table class="data-table" id="incidentTable">
+                <thead>
+                  <tr>
+                    <th>INCIDENT ID</th>
+                    <th>TIMESTAMP</th>
+                    <th>ZONE / FACILITY</th>
+                    <th>TRIGGER MODALITY</th>
+                    <th>MAX TEMP</th>
+                    <th>SMOKE PPM</th>
+                    <th>AI CONFIDENCE</th>
+                    <th>SEVERITY</th>
+                    <th>DISPATCH STATUS</th>
+                    <th>ACTIONS</th>
+                  </tr>
+                </thead>
+                <tbody id="incidentTableBody">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Incident Detail Replay Modal (Hidden by default) -->
+            <div class="incident-modal-overlay hidden" id="incidentDetailModal">
+              <div class="incident-modal-content glass-card">
+                <div class="modal-header">
+                  <h4 id="modalIncidentTitle">INCIDENT REPLAY: #INC-8924</h4>
+                  <button class="btn-close" id="btnCloseModal">✕</button>
+                </div>
+                <div class="modal-body-grid">
+                  <div class="modal-snapshot-box">
+                    <canvas id="modalSnapshotCanvas" width="400" height="250"></canvas>
+                    <div class="snapshot-caption">Thermal FLIR + Visual Snapshot at T0</div>
+                  </div>
+                  <div class="modal-telemetry-box" id="modalTelemetryDetails">
+                    <!-- Populated via JS -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Tab 6: Admin Controls & User Management (Layer 5 & 6) -->
+        <section class="tab-content" id="tab-admin">
+          <div class="admin-layout">
+            <!-- Left: User Registration & Emergency Contacts -->
+            <div class="user-mgmt-card glass-card">
+              <div class="card-header">
+                <div>
+                  <h3>REGISTERED USERS & FIRST RESPONDER PROFILES</h3>
+                  <p class="section-sub">Manage Contact Details, Notification Preferences, and Escalation Tiers</p>
+                </div>
+                <button class="btn btn-sm btn-primary" id="btnOpenAddUserModal">+ REGISTER USER</button>
+              </div>
+
+              <div class="user-list-container" id="userListContainer">
+                <!-- User Cards dynamically populated -->
+              </div>
+            </div>
+
+            <!-- Right: System Configuration & Threshold Controls -->
+            <div class="admin-controls-card glass-card">
+              <div class="card-header">
+                <div>
+                  <h3>DETECTION PARAMETERS & ALERT THRESHOLDS</h3>
+                  <p class="section-sub">Tune AI Sensitivity, Thermal Trigger Limits, and Telemetry Buffers</p>
+                </div>
+                <button class="btn btn-sm btn-success" id="btnSaveAdminConfig">SAVE SETTINGS</button>
+              </div>
+
+              <div class="admin-form-grid">
+                <div class="form-group">
+                  <label>Optical Flame Detection Confidence Threshold (%)</label>
+                  <div class="range-with-val">
+                    <input type="range" id="adminThreshFlame" min="50" max="98" value="82" class="slider-range">
+                    <span class="range-display" id="adminThreshFlameVal">82%</span>
+                  </div>
+                  <small>Lower values increase sensitivity; higher values avoid false triggers from welding/reflections.</small>
+                </div>
+
+                <div class="form-group">
+                  <label>Thermal Radiometric Anomaly Limit (°C)</label>
+                  <div class="range-with-val">
+                    <input type="range" id="adminThreshTemp" min="40" max="150" value="65" class="slider-range">
+                    <span class="range-display" id="adminThreshTempVal">65°C</span>
+                  </div>
+                  <small>Maximum acceptable surface temperature before triggering early warning stage.</small>
+                </div>
+
+                <div class="form-group">
+                  <label>Smoke Obscuration Trigger Level (PPM)</label>
+                  <div class="range-with-val">
+                    <input type="range" id="adminThreshSmoke" min="20" max="150" value="60" class="slider-range">
+                    <span class="range-display" id="adminThreshSmokeVal">60 PPM</span>
+                  </div>
+                  <small>Photoelectric / ionization particulate density limit.</small>
+                </div>
+
+                <div class="form-group">
+                  <label>Emergency Telephony Voice Dispatch Target</label>
+                  <input type="text" class="text-input" id="adminTwilioPhone" value="+1 (555) 911-FIRE (Metro Dispatch)" />
+                  <small>E.164 phone number dialed automatically upon confirmed critical threat.</small>
+                </div>
+
+                <div class="form-group">
+                  <label>Cloud / Edge Failover Policy</label>
+                  <select class="select-input" id="adminFailoverPolicy">
+                    <option value="edge_primary">Edge Primary with Cloud Burst AI (Recommended)</option>
+                    <option value="cloud_primary">Cloud Primary with Local Offline Fallback</option>
+                    <option value="edge_only">Strict Air-Gapped Edge Processing (No WAN)</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label>Anti-Gravity Zero-G UI Animation Dynamics</label>
+                  <select class="select-input" id="adminGravityEffect">
+                    <option value="fluid_float">Full Fluid Zero-Gravity Levitation & Particles</option>
+                    <option value="subtle_float">Subtle Tactical Glassmorphic Float</option>
+                    <option value="minimal">Minimal Flat Tactical (High Refresh)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- Gmail Sent Dispatch Forensic Modal -->
+      <div class="gmail-modal-overlay hidden" id="gmailDispatchModal">
+        <div class="gmail-modal-content">
+          <div class="gmail-window-header">
+            <div class="gmail-window-title">
+              <span style="color:#ea4335; font-size:1.1rem;">✉️</span>
+              <span>GMAIL EMERGENCY DISPATCH NOTIFICATION</span>
+            </div>
+            <button class="btn-close" id="btnCloseGmailModal">✕</button>
+          </div>
+          <div class="gmail-window-body">
+            <div class="gmail-meta-box">
+              <div class="gmail-meta-row"><strong>FROM:</strong> <span>AURA-FIRE Autonomous Defense &lt;alerts@aura-fire.ai&gt;</span></div>
+              <div class="gmail-meta-row"><strong>TO:</strong> <span id="gmRecipientEmail" class="text-cyan font-bold">aditya.fireproject@gmail.com</span></div>
+              <div class="gmail-meta-row"><strong>SUBJECT:</strong> <span class="text-danger font-bold">🚨 CRITICAL EMERGENCY: Fire Detected by Laptop Camera at Your Location!</span></div>
+              <div class="gmail-meta-row"><strong>DATE:</strong> <span id="gmTimestamp">2026-11-03 21:50:00</span></div>
+            </div>
+
+            <div class="gmail-body-message" id="gmFlameStatsText">
+              <strong>Incident Alert:</strong> A critical fire threat has been detected via your laptop webcam.
+              An emergency image snapshot has been captured and attached below.
+              If unacknowledged and the flame continues to increase, an autonomous phone call will be placed to your phone.
+            </div>
+
+            <div class="gmail-attachment-container">
+              <div class="attachment-label">
+                <span>📎 ATTACHED EVIDENCE PHOTO: fire-incident-evidence.jpg</span>
+              </div>
+              <img id="gmSnapshotImage" class="snapshot-preview-img" alt="Fire Incident Evidence" />
+            </div>
+          </div>
+          <div class="gmail-window-footer">
+            <button class="btn btn-secondary btn-sm" id="btnDownloadSnapshot">
+              <span>📥 Download Snapshot Photo</span>
+            </button>
+            <button class="btn btn-primary btn-sm" id="btnCloseGmailModalBtn">
+              <span>Close Viewer</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edit Registered Contact Profile Modal -->
+      <div class="edit-reg-modal-overlay hidden" id="editRegisteredContactModal">
+        <div class="edit-reg-modal-content">
+          <div class="gmail-window-header">
+            <div class="gmail-window-title">
+              <span>🛡️ EDIT REGISTERED EMERGENCY CONTACT</span>
+            </div>
+            <button class="btn-close" id="btnCloseEditRegModal">✕</button>
+          </div>
+          <div class="gmail-window-body">
+            <div class="form-group">
+              <label>Registered Person Full Name:</label>
+              <input type="text" id="inpRegName" class="text-input" value="Aditya Sharma" />
+            </div>
+            <div class="form-group">
+              <label>Registered Person Gmail Address:</label>
+              <input type="email" id="inpRegEmail" class="text-input" value="aditya.fireproject@gmail.com" />
+              <small>Incident photo snapshots will be immediately transmitted to this Gmail.</small>
+            </div>
+            <div class="form-group">
+              <label>Emergency Phone Number (Given Number to Call):</label>
+              <input type="tel" id="inpRegPhone" class="text-input" value="+91 9876543210" />
+              <small>Autonomous voice call will be dialed to this number if unacknowledged & flame is increasing.</small>
+            </div>
+            <div class="form-group">
+              <label>Escalation Countdown Timeout (Seconds):</label>
+              <input type="number" id="inpRegSeconds" class="text-input" value="15" min="5" max="60" />
+              <small>Time before automated phone call is placed if flame increases.</small>
+            </div>
+          </div>
+          <div class="gmail-window-footer">
+            <button class="btn btn-secondary btn-sm" id="btnCancelEditReg">Cancel</button>
+            <button class="btn btn-success btn-sm" id="btnSaveRegisteredContact">💾 SAVE CONTACT PROFILE</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- System Toast Notification Stack (Push alerts) -->
+      <div class="toast-stack" id="toastStack"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
